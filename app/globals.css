@@ -1,0 +1,311 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 0%;
+    --foreground: 20 14.3% 95.9%;
+
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 0 72.2% 50.6%;
+    --primary-foreground: 0 85.7% 97.3%;
+
+    --secondary: 0 0% 9%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 0 0% 9%;
+    --muted-foreground: 0 0% 63.9%;
+
+    --accent: 0 59.2% 38.6%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 59.2% 12.6%;
+    --input: 0 0% 9%;
+    --ring: 0 72.2% 50.6%;
+
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Custom card flip animation */
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(127, 29, 29, 0.7);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(127, 29, 29, 0.9);
+}
+
+/* Fog animation */
+.fog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("/fog.png");
+  background-size: cover;
+  opacity: 0.2;
+  pointer-events: none;
+  animation: fog-movement 60s infinite alternate linear;
+  z-index: 1;
+}
+
+@keyframes fog-movement {
+  0% {
+    transform: translateX(-5%) translateY(-5%);
+  }
+  100% {
+    transform: translateX(5%) translateY(5%);
+  }
+}
+
+/* Blood drip animation */
+.blood-drip {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 2px;
+  height: 0;
+  background: #7f1d1d;
+  animation: drip 4s ease-in infinite;
+  opacity: 0.7;
+}
+
+.blood-drips {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 10px;
+  overflow: visible;
+}
+
+.blood-drip-card {
+  animation: drip-card 3s ease-in infinite;
+}
+
+.blood-drip-notification {
+  animation: drip-notification 2s ease-in infinite;
+}
+
+@keyframes drip {
+  0% {
+    height: 0;
+    top: 0;
+  }
+  70% {
+    height: 100px;
+    top: 0;
+  }
+  100% {
+    height: 0;
+    top: 100px;
+  }
+}
+
+@keyframes drip-card {
+  0% {
+    height: 0;
+  }
+  70% {
+    height: 30px;
+  }
+  100% {
+    height: 0;
+    top: 30px;
+  }
+}
+
+@keyframes drip-notification {
+  0% {
+    height: 0;
+  }
+  70% {
+    height: 20px;
+  }
+  100% {
+    height: 0;
+    top: 20px;
+  }
+}
+
+/* Ornate title styling */
+.ornate-title {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.ornate-line {
+  position: relative;
+  height: 2px;
+  width: 80%;
+  max-width: 400px;
+  background: linear-gradient(90deg, transparent, rgba(127, 29, 29, 0.7), transparent);
+  margin: 1rem 0;
+}
+
+.ornate-line::before,
+.ornate-line::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgba(127, 29, 29, 0.7);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.ornate-line::before {
+  left: 20%;
+}
+
+.ornate-line::after {
+  right: 20%;
+}
+
+/* Card content styling */
+.gothic-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.card-symbol {
+  text-shadow: 0 0 10px rgba(127, 29, 29, 0.7);
+  animation: pulse 4s infinite alternate;
+}
+
+.card-name {
+  position: relative;
+}
+
+.card-name::before,
+.card-name::after {
+  content: "";
+  position: absolute;
+  height: 1px;
+  width: 20px;
+  background-color: rgba(127, 29, 29, 0.5);
+  top: 50%;
+}
+
+.card-name::before {
+  left: -25px;
+}
+
+.card-name::after {
+  right: -25px;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+/* Candle flicker effect */
+.candle-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 20px;
+  height: 40px;
+  z-index: 10;
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.candle-light {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle, rgba(255, 150, 50, 0.8) 0%, rgba(255, 100, 50, 0.4) 40%, transparent 70%);
+  border-radius: 50%;
+  animation: flicker 3s infinite alternate;
+  filter: blur(2px);
+}
+
+@keyframes flicker {
+  0%,
+  18%,
+  22%,
+  25%,
+  53%,
+  57%,
+  100% {
+    opacity: 0.8;
+    transform: translateX(-50%) scale(1);
+  }
+  20%,
+  24%,
+  55% {
+    opacity: 0.4;
+    transform: translateX(-50%) scale(0.8);
+  }
+}
+
+/* Add a subtle vignette effect */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, transparent 50%, rgba(0, 0, 0, 0.6) 100%);
+  pointer-events: none;
+  z-index: 2;
+}
